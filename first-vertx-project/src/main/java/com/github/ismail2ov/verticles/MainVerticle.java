@@ -6,8 +6,12 @@ import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainVerticle extends AbstractVerticle {
+
+  public static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
 
   public static void main(String[] args) {
     final Vertx vertx = Vertx.vertx();
@@ -16,7 +20,7 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    System.out.println("Start " + getClass().getName());
+    LOG.debug("Start {}", getClass().getName());
     vertx.deployVerticle(new VerticleA());
     vertx.deployVerticle(new VerticleB());
     vertx.deployVerticle(VerticleN.class.getName(),
